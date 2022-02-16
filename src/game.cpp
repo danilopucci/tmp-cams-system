@@ -41,6 +41,7 @@
 #include "talkaction.h"
 #include "weapons.h"
 #include "script.h"
+#include "cams.h"
 
 #include <fmt/format.h>
 
@@ -152,6 +153,7 @@ void Game::setGameState(GameState_t newState)
 			g_scheduler.stop();
 			g_databaseTasks.stop();
 			g_dispatcher.stop();
+			g_cams.stop();
 			break;
 		}
 
@@ -4685,6 +4687,7 @@ void Game::shutdown()
 	g_scheduler.shutdown();
 	g_databaseTasks.shutdown();
 	g_dispatcher.shutdown();
+	g_cams.shutdown();
 	map.spawns.clear();
 	raids.clear();
 

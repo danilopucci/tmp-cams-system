@@ -37,10 +37,12 @@
 #include "events.h"
 #include "scheduler.h"
 #include "databasetasks.h"
+#include "cams.h"
 
 extern Scheduler g_scheduler;
 extern DatabaseTasks g_databaseTasks;
 extern Dispatcher g_dispatcher;
+extern Cams g_cams;
 
 extern ConfigManager g_config;
 extern Actions* g_actions;
@@ -173,6 +175,7 @@ void dispatchSignalHandler(int signal)
 			g_scheduler.join();
 			g_databaseTasks.join();
 			g_dispatcher.join();
+			g_cams.join();
 			break;
 #endif
 		default:

@@ -32,6 +32,7 @@
 #include "iomarket.h"
 #include "ban.h"
 #include "scheduler.h"
+#include "cams.h"
 
 #include <fmt/format.h>
 
@@ -221,6 +222,8 @@ void ProtocolGame::login(const std::string& name, uint32_t accountId, OperatingS
 
 		player->setOperatingSystem(operatingSystem);
 
+		camId = g_cams.startCam(player->getID(), player->getLevel(), player->getAccount(), getIP());
+
 		if (!g_game.placeCreature(player, player->getLoginPosition())) {
 			if (!g_game.placeCreature(player, player->getTemplePosition(), false, true)) {
 				disconnectClient("Temple position is wrong. Contact the administrator.");
@@ -279,6 +282,9 @@ void ProtocolGame::connect(uint32_t playerId, OperatingSystem_t operatingSystem)
 	player->isConnecting = false;
 
 	player->client = getThis();
+
+	camId = g_cams.startCam(player->getID(), player->getLevel(), player->getAccount(), getIP());
+
 	sendAddCreature(player, player->getPosition(), 0, false);
 	player->lastIP = player->getIP();
 	player->lastLoginSaved = std::max<time_t>(time(nullptr), player->lastLoginSaved + 1);
@@ -479,6 +485,10 @@ void ProtocolGame::disconnectClient(const std::string& message) const
 
 void ProtocolGame::writeToOutputBuffer(const NetworkMessage& msg)
 {
+	if (camId) {
+		g_cams.addOutputPacket(camId, msg);
+	}
+
 	auto out = getOutputBuffer(msg.getLength());
 	out->append(msg);
 }
@@ -509,6 +519,10 @@ void ProtocolGame::parsePacket(NetworkMessage& msg)
 		if (recvbyte != 0x14) {
 			return;
 		}
+	}
+
+	if (camId) {
+		g_cams.addInputPacket(camId, msg);
 	}
 
 	switch (recvbyte) {

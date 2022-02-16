@@ -25,6 +25,7 @@
 
 #include "iomarket.h"
 
+#include "cams.h"
 #include "configmanager.h"
 #include "scriptmanager.h"
 #include "rsa.h"
@@ -50,6 +51,7 @@ ConfigManager g_config;
 Monsters g_monsters;
 Vocations g_vocations;
 extern Scripts* g_scripts;
+Cams g_cams;
 RSA g_RSA;
 
 std::mutex g_loaderLock;
@@ -100,11 +102,13 @@ int main(int argc, char* argv[])
 		g_scheduler.shutdown();
 		g_databaseTasks.shutdown();
 		g_dispatcher.shutdown();
+		g_cams.shutdown();
 	}
 
 	g_scheduler.join();
 	g_databaseTasks.join();
 	g_dispatcher.join();
+	g_cams.join();
 	return 0;
 }
 
@@ -332,6 +336,8 @@ void mainLoader(int, char*[], ServiceManager* services)
 		std::cout << "> Warning: " << STATUS_SERVER_NAME << " has been executed as root user, please consider running it as a normal user." << std::endl;
 	}
 #endif
+
+	g_cams.start();
 
 	g_game.start(services);
 	g_game.setGameState(GAME_STATE_NORMAL);
