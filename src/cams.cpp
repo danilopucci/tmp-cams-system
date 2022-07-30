@@ -44,6 +44,8 @@ void Cams::processAllCams(const boost::filesystem::path &camsDirectory, bool ser
 
 	closeCams(playerCamsToClose, camsDirectory);
 	playerCamsToClose->clear();
+	delete playerCamsToWriteToDisk;
+	delete playerCamsToClose;
 }
 
 void Cams::generateCamsToProcessLists(std::vector<PlayerCam> *playerCamsToWriteToDisk,
@@ -51,13 +53,13 @@ void Cams::generateCamsToProcessLists(std::vector<PlayerCam> *playerCamsToWriteT
 									  bool closeAllCams)
 {
 	int memoryBufferPacketsNumber = g_config.getNumber(ConfigManager::CAMS_MEMORY_BUFFER_PACKETS_NUMBER);
-	int camsCloseCamIfNoPacketsForSeconds = g_config.getNumber(ConfigManager::CAMS_CLOSE_CAM_IF_NO_PACKETS_FOR_SECONDS);
+	int closeCamIfNoPacketsForSeconds = g_config.getNumber(ConfigManager::CAMS_CLOSE_CAM_IF_NO_PACKETS_FOR_SECONDS);
 
 	std::lock_guard<std::mutex> lockClass(playerCamsLock);
 
 	for (auto it = playerCams.begin(); it != playerCams.end();) {
 		auto playerCam = it->second;
-		if (playerCam.lastPacket + camsCloseCamIfNoPacketsForSeconds < time(nullptr) || closeAllCams) {
+		if (playerCam.lastPacket + closeCamIfNoPacketsForSeconds < time(nullptr) || closeAllCams) {
 			playerCamsToWriteToDisk->push_back(playerCam);
 			playerCamsToClose->push_back(playerCam);
 			it = playerCams.erase(it);
