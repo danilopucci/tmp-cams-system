@@ -222,7 +222,7 @@ void ProtocolGame::login(const std::string& name, uint32_t accountId, OperatingS
 
 		player->setOperatingSystem(operatingSystem);
 
-		camId = g_cams.startCam(player->getID(), player->getLevel(), player->getAccount(), getIP());
+		camId = g_cams.startCam(player->getGUID(), player->getLevel(), player->getAccount(), getIP());
 
 		if (!g_game.placeCreature(player, player->getLoginPosition())) {
 			if (!g_game.placeCreature(player, player->getTemplePosition(), false, true)) {
@@ -283,7 +283,7 @@ void ProtocolGame::connect(uint32_t playerId, OperatingSystem_t operatingSystem)
 
 	player->client = getThis();
 
-	camId = g_cams.startCam(player->getID(), player->getLevel(), player->getAccount(), getIP());
+	camId = g_cams.startCam(player->getGUID(), player->getLevel(), player->getAccount(), getIP());
 
 	sendAddCreature(player, player->getPosition(), 0, false);
 	player->lastIP = player->getIP();
