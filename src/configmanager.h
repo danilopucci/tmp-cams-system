@@ -71,6 +71,7 @@ class ConfigManager
 			PLAYER_CONSOLE_LOGS,
 			CAMS_ENABLED,
 			CAMS_RECORD_INPUT_PACKETS,
+			CAMS_RECORD_OUTPUT_PACKETS,
 
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};

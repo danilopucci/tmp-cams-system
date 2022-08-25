@@ -189,6 +189,10 @@ void Cams::addOutputPacket(uint64_t camId, const NetworkMessage &msg)
 		return;
 	}
 
+	if (!g_config.getBoolean(ConfigManager::CAMS_RECORD_OUTPUT_PACKETS)) {
+		return;
+	}
+
 	std::lock_guard<std::mutex> lockClass(playerCamsLock);
 
 	auto it = playerCams.find(camId);

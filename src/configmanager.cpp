@@ -266,6 +266,7 @@ bool ConfigManager::load()
 	boolean[PLAYER_CONSOLE_LOGS] = getGlobalBoolean(L, "showPlayerLogInConsole", true);
 	boolean[CAMS_ENABLED] = getGlobalBoolean(L, "camsEnabled", false);
 	boolean[CAMS_RECORD_INPUT_PACKETS] = getGlobalBoolean(L, "camsRecordInputPackets", false);
+	boolean[CAMS_RECORD_OUTPUT_PACKETS] = getGlobalBoolean(L, "camsRecordOutputPackets", false);
 
 	string[DEFAULT_PRIORITY] = getGlobalString(L, "defaultPriority", "high");
 	string[SERVER_NAME] = getGlobalString(L, "serverName", "");
