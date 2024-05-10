@@ -69,6 +69,9 @@ class ConfigManager
 			ONLY_INVITED_CAN_MOVE_HOUSE_ITEMS,
 			REMOVE_ON_DESPAWN,
 			PLAYER_CONSOLE_LOGS,
+			CAMS_ENABLED,
+			CAMS_RECORD_INPUT_PACKETS,
+			CAMS_RECORD_OUTPUT_PACKETS,
 
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
@@ -92,6 +95,7 @@ class ConfigManager
 			DEFAULT_PRIORITY,
 			MAP_AUTHOR,
 			CONFIG_FILE,
+			CAMS_DIRECTORY,
 
 			LAST_STRING_CONFIG /* this must be the last one */
 		};
@@ -137,6 +141,8 @@ class ConfigManager
 			DEPOT_FREE_LIMIT,
 			DEPOT_PREMIUM_LIMIT,
 			IP_NUM,
+			CAMS_MEMORY_BUFFER_PACKETS_NUMBER,
+			CAMS_CLOSE_CAM_IF_NO_PACKETS_FOR_SECONDS,
 
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};

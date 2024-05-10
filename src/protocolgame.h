@@ -339,6 +339,7 @@ class ProtocolGame final : public Protocol
 
 		bool debugAssertSent = false;
 		bool acceptPackets = false;
+		uint64_t camId = 0;
 };
 
 #endif

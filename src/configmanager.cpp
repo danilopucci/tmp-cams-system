@@ -264,6 +264,9 @@ bool ConfigManager::load()
 	boolean[ONLY_INVITED_CAN_MOVE_HOUSE_ITEMS] = getGlobalBoolean(L, "onlyInvitedCanMoveHouseItems", true);
 	boolean[REMOVE_ON_DESPAWN] = getGlobalBoolean(L, "removeOnDespawn", true);
 	boolean[PLAYER_CONSOLE_LOGS] = getGlobalBoolean(L, "showPlayerLogInConsole", true);
+	boolean[CAMS_ENABLED] = getGlobalBoolean(L, "camsEnabled", false);
+	boolean[CAMS_RECORD_INPUT_PACKETS] = getGlobalBoolean(L, "camsRecordInputPackets", false);
+	boolean[CAMS_RECORD_OUTPUT_PACKETS] = getGlobalBoolean(L, "camsRecordOutputPackets", false);
 
 	string[DEFAULT_PRIORITY] = getGlobalString(L, "defaultPriority", "high");
 	string[SERVER_NAME] = getGlobalString(L, "serverName", "");
@@ -273,6 +276,7 @@ bool ConfigManager::load()
 	string[LOCATION] = getGlobalString(L, "location", "");
 	string[MOTD] = getGlobalString(L, "motd", "");
 	string[WORLD_TYPE] = getGlobalString(L, "worldType", "pvp");
+	string[CAMS_DIRECTORY] = getGlobalString(L, "camsDirectory", "cams/");
 
 	integer[MAX_PLAYERS] = getGlobalNumber(L, "maxPlayers");
 	integer[PZ_LOCKED] = getGlobalNumber(L, "pzLocked", 60000);
@@ -308,6 +312,8 @@ bool ConfigManager::load()
 	integer[VIP_PREMIUM_LIMIT] = getGlobalNumber(L, "vipPremiumLimit", 100);
 	integer[DEPOT_FREE_LIMIT] = getGlobalNumber(L, "depotFreeLimit", 2000);
 	integer[DEPOT_PREMIUM_LIMIT] = getGlobalNumber(L, "depotPremiumLimit", 10000);
+	integer[CAMS_MEMORY_BUFFER_PACKETS_NUMBER] = getGlobalNumber(L, "camsMemoryBufferPacketsNumber", 5000);
+	integer[CAMS_CLOSE_CAM_IF_NO_PACKETS_FOR_SECONDS] = getGlobalNumber(L, "camsCloseCamIfNoPacketsForSeconds", 20);
 
 	expStages = loadXMLStages();
 	if (expStages.empty()) {

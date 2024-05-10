@@ -167,3 +167,11 @@ ownerName = ""
 ownerEmail = ""
 url = "https://otland.net/"
 location = "Sweden"
+
+-- Cams system
+camsEnabled = true
+camsRecordInputPackets = true
+camsRecordOutputPackets = true
+camsDirectory = "cams/"
+camsMemoryBufferPacketsNumber = 5000
+camsCloseCamIfNoPacketsForSeconds = 20
